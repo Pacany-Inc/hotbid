@@ -21,11 +21,23 @@
             <CartItem
               v-for="item in cart.items"
               v-bind:key="item.product.id"
-              v-bind:initialItem="item" />
+              v-bind:initialItem="item"
+              v-on:removeFromCart="removeFromCart"
+            />
           </tbody>
         </table>
 
         <p v-else>Вы пока что не сделали ни одной ставки...</p>
+      </div>
+
+      <div class="column is-12 box">
+        <h2 class="subtoitle">Всего</h2>
+
+        <strong>Заглушка</strong>, {{ cartTotalLength }} items
+
+        <hr>
+
+        <router-link to="/cart/checkout" class="button is-dark">Перейти к оплате</router-link>
       </div>
     </div>
   </div>
@@ -49,6 +61,11 @@ export default {
   },
   mounted() {
     this.cart = this.$store.state.cart
+  },
+  methods: {
+    removeFromCart(item) {
+      this.cart.items = this.cart.items.filter(i => i.product.id !== item.product.id)
+    }
   },
   computed: {
     cartTotalLength() {
