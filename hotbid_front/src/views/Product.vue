@@ -1,24 +1,36 @@
 <template>
   <div class="page-product">
     <div class="columns is-multiline">
-      <div class="column is-9">
+      <div class="column is-4">
         <figure class="image mb-6">
           <img v-bind:src="product.get_image">
         </figure>
 
+
+      </div>
+
+      <div class="column is-4">
         <h1 class="title">{{ product.name }}</h1>
 
         <p>{{ product.description }}</p>
       </div>
 
-      <div class="column is-3">
-        <h2 class="subtitle">Описание</h2>
+      <div class="column is-4">
+        <h1 class="title">Статус: Торгуется</h1>
 
-        <p><strong>Текущая цена: {{ product.price }}РУБ</strong></p>
+        <p><strong>До окончания торгов: 00:00:00</strong></p>
+
+        <hr>
+
+        <p><strong>Начальная цена: {{ product.price }}РУБ</strong></p>
+
+        <hr>
+
+        <p><strong>Текущая цена: 100 РУБ</strong></p>
 
         <div class="field has-addons mt-6">
           <div class="control">
-            <input type="number" class="input" min="1" v-model="quantity">
+            <input type="number" class="input no-spinner" placeholder="Введите сумму" v-model="quantity">
           </div>
 
           <div class="control">
@@ -40,7 +52,7 @@ export default {
   data() {
     return {
       product: {},
-      quantity: 1
+      quantity: 0
     }
   },
   mounted() {
@@ -91,3 +103,19 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+img {
+  height: 30vw;
+  width: auto;
+}
+.no-spinner::-webkit-outer-spin-button,
+.no-spinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.no-spinner {
+  -moz-appearance: textfield;
+}
+</style>

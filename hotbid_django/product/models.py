@@ -20,6 +20,12 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    STATUS_CHOICES = [
+        ('AU', 'Auctioning'),
+        ('WI', 'Withdrawn'),
+        ('SO', 'Sold'),
+    ]
+    
     category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     slug = models.SlugField()
@@ -28,6 +34,10 @@ class Product(models.Model):
     image = models.ImageField(upload_to='uploads/', blank=True, null=True)
     thumbnail = models.ImageField(upload_to='uploads/', blank=True, null=True)
     date_added = models.DateTimeField(auto_now_add=True)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    status = models.CharField(max_length=2, choices=STATUS_CHOICES, default='AU')
+    starting_price = models.DecimalField(max_digits=15, decimal_places=2)
 
     class Meta:
         ordering = ('-date_added',)
