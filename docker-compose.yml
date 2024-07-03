@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: ./hotbid_django
+    container_name: django-backend
+    volumes:
+      - ./hotbid_django:/app
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: ./hotbid_front
+    container_name: vue-frontend
+    volumes:
+      - ./hotbid_front:/app
+    ports:
+      - "8080:8080"
